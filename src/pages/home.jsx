@@ -14,12 +14,8 @@ const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cards] = useState([
     {
-      title: "A'LA CARTE Menu",
-      description: "Choose your favorite dishes individually.",
-    },
-    {
       title: "Pizza",
-      description: "Delicious pizza with various toppings.",
+      description: "Delicioues pizza with various toppings.",
     },
     {
       title: "Pasta",

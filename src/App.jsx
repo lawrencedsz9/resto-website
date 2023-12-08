@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
+import ChatBot from "./components/chats";
 import Displaycard from "./components/Displaycard";
 import Login from "./pages/login";
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/chats" element={<ChatBot />} />
             <Route path="/add" element={<AddItem />} />
             <Route path="/display" element={<Displaycard />} />
           </Routes>
