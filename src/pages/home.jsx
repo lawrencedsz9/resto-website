@@ -40,8 +40,8 @@ const Home = () => {
 
       {/* Unified Cart Section */}
       <div
-        className={`fixed top-0 right-0 h-screen bg-white p-8 rounded-lg shadow-md ${
-          isCartOpen ? "w-1/3" : "w-0"
+        className={`fixed top-0 right-0 h-screen bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 ${
+          isCartOpen ? "block" : "hidden"
         } transition-all duration-300 overflow-y-auto`}
       >
         <button
