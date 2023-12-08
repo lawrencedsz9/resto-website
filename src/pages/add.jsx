@@ -6,6 +6,7 @@ const AddItem = () => {
   const [desc, setDesc] = useState("");
   const [best, setBest] = useState(false);
   const [nonveg, setNonveg] = useState(false);
+  const [tags, setTags] = useState("");
 
   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -27,9 +28,10 @@ const AddItem = () => {
       const data = {
         item: item,
         price: price,
+        desc: desc,
         best: best,
         nonveg: nonveg,
-        desc: desc,
+        tags: tags,
       };
       console.log(data);
       fetch(`${SERVER_URL}/add`, {
@@ -95,13 +97,13 @@ const AddItem = () => {
             className="p-1 m-1"
           />
           <label htmlFor="nonveg">Non-Veg?</label>
-          {/* <input
-            type="checkbox"
-            value="nonveg"
-            id="nonveg"
+          <input
+            type="text"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
             className="p-1 m-1"
+            placeholder="Tags"
           />
-          <label htmlFor="bestseller">Bestseller?</label> */}
           <button
             type="submit"
             // onClick={handleAddItem}

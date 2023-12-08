@@ -18,23 +18,25 @@ db.once("open", function () {
 });
 
 app.post("/add", async (req, res) => {
-  const { item, price, best, nonveg } = req.body;
+  const { item, price, desc, best, nonveg, tags } = req.body;
 
   const data = await foodmodel.insertMany({
     f_name: item,
     f_price: price,
+    description: desc,
     best: best,
     nonveg: nonveg,
+    tags: tags,
   });
 });
 
 app.post("/order", (req, res) => {
-    console.log("data rec")
-})
+  console.log("data rec");
+});
 
 app.get("/getdata", async (req, res) => {
   const data = await foodmodel.find();
-  res.json({ "data": data });
+  res.json({ data: data });
 });
 
 app.post("/login", async (req, res) => {
