@@ -1,7 +1,30 @@
 import React, { useState } from "react";
 
+const Card = ({ title, description }) => {
+  return (
+    <div className="bg-white p-4 rounded-md shadow-md mb-4">
+      <h2 className="text-xl font-bold mb-2">{title}</h2>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+};
+
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cards] = useState([
+    {
+      title: "Popular Dishes",
+      description: "Check out our most loved dishes...",
+    },
+    {
+      title: "Veg Menu",
+      description: "Explore our delicious vegetarian dishes.",
+    },
+    {
+      title: "Non-Veg Menu",
+      description: "Explore our delicious non-vegetarian dishes.",
+    },
+  ]);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -14,28 +37,9 @@ const Home = () => {
         <h1 className="text-4xl font-bold mb-4 w-fill">
           Welcome to Our Restaurant
         </h1>
-        <section className="mt-6 welcome-section">
-          <h2 className="text-2xl font-bold">Popular Dishes</h2>
-          <p className="text-gray-600">
-            Check out our most loved dishes that keep our customers coming back
-            for more.
-          </p>
-        </section>
-        <p className="text-gray-600">
-          Explore our delicious menu and enjoy a delightful dining experience.
-        </p>
-        <section className="mt-6">
-          <h2 className="text-2xl font-bold">Veg Menu</h2>
-          <p className="text-gray-600">
-            Explore our delicious vegetarian dishes.
-          </p>
-        </section>
-        <section className="mt-6">
-          <h2 className="text-2xl font-bold">Non-Veg Menu</h2>
-          <p className="text-gray-600">
-            Explore our delicious non-vegetarian dishes.
-          </p>
-        </section>
+        {cards.map((card, index) => (
+          <Card key={index} title={card.title} description={card.description} />
+        ))}
       </div>
 
       {/* Unified Cart Section */}
