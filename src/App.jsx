@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
+import ChatBot from "./components/chats";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/chats" element={<ChatBot />} />
           </Routes>
         </Router>
       </div>

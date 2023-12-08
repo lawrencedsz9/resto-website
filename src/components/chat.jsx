@@ -43,6 +43,11 @@ const ChatBot = () => {
           </div>
         ))}
       </div>
+      <iframe
+        height="430"
+        width="350"
+        src="https://bot.dialogflow.com/d6e1f6ff-8f0e-4fc3-999b-3cc94b29dfcc"
+      ></iframe>
       <div className="flex mt-2">
         <input
           type="text"
