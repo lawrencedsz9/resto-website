@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@kommunicate/kommunicate-chatbot-plugin": "^0.0.7",
     "cors": "^2.8.5",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2",
