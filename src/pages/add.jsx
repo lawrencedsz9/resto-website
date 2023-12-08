@@ -3,6 +3,10 @@ import React, { useState } from "react";
 const AddItem = () => {
   const [item, setItem] = useState("");
   const [price, setPrice] = useState("");
+  const [best, setBest] = useState(false);
+  const [nonveg, setNonveg] = useState(false);
+
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
   //   const handleInputChange = (e) => {
   //     setItem(e.target.value);
@@ -10,6 +14,33 @@ const AddItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (item != "" && price != "") {
+      sendDataToBackEnd(e);
+    } else {
+      console.log("Error");
+    }
+  };
+
+  const sendDataToBackEnd = async (e) => {
+    try {
+      const data = {
+        item: item,
+        price: price,
+        best: best,
+        nonveg: nonveg,
+      };
+      console.log(data);
+      fetch(`${SERVER_URL}/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
     // Add your logic to handle the submission here
     console.log("Item:", item);
     setItem("");
@@ -38,18 +69,20 @@ const AddItem = () => {
           />
           <input
             type="checkbox"
-            value="Bestseller"
+            value={best}
+            onChange={(e) => setBest(e.target.value)}
             id="bestseller"
             className="p-1 m-1"
           />
           <label htmlFor="bestseller">Bestseller?</label>
           <input
             type="checkbox"
-            value="nonveg"
+            value={nonveg}
+            onChange={(e) => setNonveg(e.target.value)}
             id="nonveg"
             className="p-1 m-1"
           />
-          <label htmlFor="bestseller">Non-Veg?</label>
+          <label htmlFor="nonveg">Non-Veg?</label>
           {/* <input
             type="checkbox"
             value="nonveg"
@@ -57,7 +90,11 @@ const AddItem = () => {
             className="p-1 m-1"
           />
           <label htmlFor="bestseller">Bestseller?</label> */}
-          <button type="submit" className=" p-1 m-1 rounded bg-slate-50">
+          <button
+            type="submit"
+            // onClick={handleAddItem}
+            className=" p-1 m-1 rounded bg-slate-50"
+          >
             Add
           </button>
         </form>
