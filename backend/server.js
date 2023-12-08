@@ -23,8 +23,8 @@ app.post("/add", async (req, res) => {
   const data = await foodmodel.insertMany({
     f_name: item,
     f_price: price,
-    best: false,
-    nonveg: false,
+    best: best,
+    nonveg: nonveg,
   });
 });
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Chat from "../components/chat";
 
 const Card = ({ title, description }) => {
   return (
@@ -91,6 +92,8 @@ const Home = () => {
           Checkout
         </button>
       </div>
+
+      {/* <Chat /> */}
 
       {/* Cart Button */}
       <div className="fixed bottom-4 right-4">

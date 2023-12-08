@@ -6,7 +6,7 @@ import AdminPage from "./pages/admin";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import AddItem from "./pages/add";
-import Chat from "./pages/chat";
+import Chat from "./components/chat";
 
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
       <div className="w-full ">
         <Router>
           <Routes>
-            <Route path="/" element={<Chat />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Router>
