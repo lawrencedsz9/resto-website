@@ -34,7 +34,7 @@ app.post("/order", (req, res) => {
 
 app.get("/getdata", async (req, res) => {
   const data = await foodmodel.find();
-  res.json({ data: data });
+  res.json({ "data": data });
 });
 
 app.post("/login", async (req, res) => {
