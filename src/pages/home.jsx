@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Chat from "../components/chat";
+import Chats from "../components/chats";
+import BG from "../../public/wallpaper.jpg";
 
 const Card = ({ title, description }) => {
   return (
@@ -36,7 +37,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-gray-100 w-full">
+    <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-[url('../../public/wallpaper.jpg')] w-full ">
       <div className="bg-white p-8 rounded-lg shadow-md md:mr-4">
         <div className="h-20"></div>
         <h1 className="text-4xl font-bold mb-4 w-fill">
@@ -98,7 +99,7 @@ const Home = () => {
       </div>
 
       {/* Chat Component */}
-      <Chat />
+      <Chats />
 
       {/* Cart Button */}
       <div className="fixed bottom-4 right-4">
