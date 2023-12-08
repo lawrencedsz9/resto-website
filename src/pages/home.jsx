@@ -51,7 +51,7 @@ const Card = ({ title, description, addToCart }) => {
           className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
           onClick={handleAddToCart}
         >
-          Add
+          Add to Cart
         </button>
       </div>
     </div>
@@ -79,6 +79,10 @@ const Home = () => {
     },
   ]);
   const [cartItems, setCartItems] = useState([]);
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [addOns, setAddOns] = useState("");
+  const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -86,6 +90,20 @@ const Home = () => {
 
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
+  };
+
+  const handleCheckout = () => {
+    // Calculate total price
+    const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+
+    // Display confirmation message
+    setIsOrderConfirmed(true);
+    console.log("Confirm Order");
+    console.log("Total Price:", totalPrice.toFixed(2));
+  };
+
+  const handleAddOnsChange = (event) => {
+    setAddOns(event.target.value);
   };
 
   return (
@@ -135,33 +153,88 @@ const Home = () => {
           </svg>
         </button>
         <h2 className="text-2xl font-bold">Add to Cart</h2>
-        <section className="mt-4">
-          <h3 className="text-xl font-bold">List of Items</h3>
-          {cartItems.map((item, index) => (
-            <div key={index}>
-              <p>{item.title}</p>
-              <p>Price: ${item.price.toFixed(2)}</p>
+        {isOrderConfirmed ? (
+          <div className="mt-4 p-4 bg-gray-100 rounded-md">
+            <h3 className="text-xl font-bold">Order Details</h3>
+            <section>
+              <h4 className="text-lg font-bold">List of Items</h4>
+              {cartItems.map((item, index) => (
+                <div key={index}>
+                  <p>{item.title}</p>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Add-ons</h4>
+              <p>{addOns}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Name</h4>
+              <p>{name}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Phone Number</h4>
+              <p>{phoneNumber}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Total Price</h4>
+              <p>
+                $
+                {cartItems
+                  .reduce((total, item) => total + item.price, 0)
+                  .toFixed(2)}
+              </p>
+            </section>
+          </div>
+        ) : (
+          <>
+            <section className="mt-4">
+              <h3 className="text-xl font-bold">List of Items</h3>
+              {cartItems.map((item, index) => (
+                <div key={index}>
+                  <p>{item.title}</p>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </section>
+            <section className="mt-4">
+              <h3 className="text-xl font-bold">Add-ons</h3>
+              <input
+                type="text"
+                placeholder="Add-ons"
+                value={addOns}
+                onChange={handleAddOnsChange}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
+            </section>
+            <div className="mt-4">
+              <h3 className="text-xl font-bold">Name</h3>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
             </div>
-          ))}
-        </section>
-        <section className="mt-4">
-          <h3 className="text-xl font-bold">Add-ons</h3>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mt-4"
-            onClick={() => {
-              console.log("Add-ons clicked");
-            }}
-          >
-            Add Add-ons
-          </button>
-        </section>
+            <div className="mt-4">
+              <h3 className="text-xl font-bold">Phone Number</h3>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
+            </div>
+          </>
+        )}
         <button
           className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green mt-4"
-          onClick={() => {
-            console.log("Checkout clicked");
-          }}
+          onClick={handleCheckout}
         >
-          Checkout
+          {isOrderConfirmed ? "Confirm Order" : "Checkout"}
         </button>
       </div>
 
