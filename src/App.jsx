@@ -5,6 +5,9 @@ import Home from "./pages/home";
 import AdminPage from "./pages/admin";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import AddItem from "./pages/add";
+import Chat from "./pages/chat";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,7 +18,8 @@ function App() {
       <div className="w-full ">
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Chat />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Router>
