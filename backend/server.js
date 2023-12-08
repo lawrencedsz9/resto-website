@@ -28,6 +28,11 @@ app.post("/add", async (req, res) => {
   });
 });
 
+app.get("/", async (req, res) => {
+  const data = await foodmodel.find();
+  res.send(data);
+});
+
 app.listen(port, () => {
   console.log(`app is running in ${port}`);
 });
