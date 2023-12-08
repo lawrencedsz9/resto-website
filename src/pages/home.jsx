@@ -4,14 +4,17 @@ import BG from "../../public/wallpaper.jpg";
 
 const Card = ({ title, description }) => {
   const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(8.99);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
+    setPrice(price + 8.99);
   };
 
   const decrementQuantity = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
+      setPrice(price - 8.99);
     }
   };
 
@@ -21,7 +24,7 @@ const Card = ({ title, description }) => {
       <p className="text-gray-600">{description}</p>
 
       {/* Money Text */}
-      <p className="text-red-500 font-bold mt-2">$8.99</p>
+      <p className="text-red-500 font-bold mt-2">${price.toFixed(2)}</p>
 
       {/* Quantity and Add Option */}
       <div className="flex items-center justify-between mt-2">
