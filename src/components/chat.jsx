@@ -26,13 +26,17 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded-md shadow-md w-1/3"> {/* Updated className */}
+    <div className="max-w-md mx-auto mt-8 p-4 border rounded-md shadow-md w-1/3">
+      {" "}
+      {/* Updated className */}
       <div className="h-80 overflow-y-auto border-b" ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <div
             key={index}
             className={`p-2 mb-2 ${
-              msg.isUser ? "text-right text-blue-500" : "text-left text-gray-700"
+              msg.isUser
+                ? "text-right text-blue-500"
+                : "text-left text-gray-700"
             }`}
           >
             {msg.text}
