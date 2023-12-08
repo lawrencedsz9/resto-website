@@ -9,13 +9,12 @@ import AddItem from "./pages/add";
 import Chat from "./components/chat";
 import Displaycard from "./components/Displaycard";
 
-
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="w-full ">
         <Router>
           <Routes>
