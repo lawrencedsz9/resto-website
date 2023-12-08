@@ -8,23 +8,23 @@ import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
 
+
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Navbar />
-      <div className="flex items-center justify-center w-full h-full bg-slate-300">
+      {/* <Navbar /> */}
+      <div className="w-full ">
         <Router>
           <Routes>
             <Route path="/chat" element={<Chat />} />
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
-            <Route path="/add" element={<AddItem />} />
           </Routes>
         </Router>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
