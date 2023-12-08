@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@kommunicate/kommunicate-chatbot-plugin": "^0.0.7",
+=======
+    "@vitejs/plugin-react-swc": "^3.5.0",
+>>>>>>> 3b37f80e88f302580b4be7896cb60cddc3df90eb
     "cors": "^2.8.5",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2",
     "react": "^18.2.0",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.20.1",
@@ -25,7 +30,7 @@
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.16",
-    "babel-core": "^6.26.3",
+    "babel-core": "^4.7.16",
     "babel-loader": "^9.1.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
