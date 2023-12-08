@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
+import Displaycard from "./components/Displaycard";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path ="/display" element = {<Displaycard/>}/>
           </Routes>
         </Router>
       </div>
