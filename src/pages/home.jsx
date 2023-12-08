@@ -54,6 +54,12 @@ const Card = ({ title, description, addToCart ,price}) => {
         >
           Add to Cart
         </button>
+        <button
+          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red"
+          onClick={() => addToCart({ title, price, remove: true })}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );
@@ -86,7 +92,14 @@ const Home = () => {
   };
 
   const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+    if (item.remove) {
+      const updatedCartItems = cartItems.filter(
+        (cartItem) => cartItem.title !== item.title
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems([...cartItems, item]);
+    }
   };
 
   const handleCheckout = () => {
