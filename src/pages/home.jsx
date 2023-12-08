@@ -15,7 +15,7 @@ const Home = () => {
   const [cards] = useState([
     {
       title: "Pizza",
-      description: "Delicious pizza with various toppings.",
+      description: "Delicioues pizza with various toppings.",
     },
     {
       title: "Pasta",

@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="w-full ">
+      <div className="w-full">
         <Router>
           <Routes>
             <Route path="/chat" element={<Chat />} />
