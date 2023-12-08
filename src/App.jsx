@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
+import Login from "./pages/login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,12 +15,14 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="w-full ">
+      <div className="w-full flex justify-center items-center">
         <Router>
           <Routes>
             <Route path="/chat" element={<Chat />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/add" element={<AddItem />} />
           </Routes>
         </Router>
       </div>

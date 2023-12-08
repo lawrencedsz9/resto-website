@@ -29,8 +29,14 @@ app.post("/add", async (req, res) => {
 });
 
 app.get("/getdata", async (req, res) => {
-    const data = await foodmodel.find();
-    res.json({"data":data})
+  const data = await foodmodel.find();
+  res.json({ data: data });
+});
+
+app.post("/login", async (req, res) => {
+  const { mobileNumber } = req.body;
+  const data = await foodmodel.find({ mobileNumber: mobileNumber });
+  res.json({ data: data });
 });
 
 app.listen(port, () => {
