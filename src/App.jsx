@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="w-full h-20 bg-slate-300">
+      <div className="flex items-center justify-center w-full h-full bg-slate-300">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
