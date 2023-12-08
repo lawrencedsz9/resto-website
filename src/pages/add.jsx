@@ -46,6 +46,8 @@ const AddItem = () => {
     setItem("");
     console.log("Price:", price);
     setPrice("");
+    console.log("Best:", best);
+    console.log("Nonveg:", nonveg);
   };
 
   return (
@@ -70,7 +72,7 @@ const AddItem = () => {
           <input
             type="checkbox"
             value={best}
-            onChange={(e) => setBest(e.target.value)}
+            onChange={(e) => setBest(e.target.checked)}
             id="bestseller"
             className="p-1 m-1"
           />
@@ -78,7 +80,7 @@ const AddItem = () => {
           <input
             type="checkbox"
             value={nonveg}
-            onChange={(e) => setNonveg(e.target.value)}
+            onChange={(e) => setNonveg(e.target.checked)}
             id="nonveg"
             className="p-1 m-1"
           />
