@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import AdminPage from "./pages/admin";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import AddItem from "./pages/add";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/add" element={<AddItem />} />
           </Routes>
         </Router>
       </div>
