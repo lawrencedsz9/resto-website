@@ -14,16 +14,20 @@ const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cards] = useState([
     {
-      title: "Popular Dishes",
-      description: "Check out our most loved dishes...",
+      title: "Pizza",
+      description: "Delicious pizza with various toppings.",
     },
     {
-      title: "Veg Menu",
-      description: "Explore our delicious vegetarian dishes.",
+      title: "Pasta",
+      description: "Classic pasta with your choice of sauce.",
     },
     {
-      title: "Non-Veg Menu",
-      description: "Explore our delicious non-vegetarian dishes.",
+      title: "Burger",
+      description: "Juicy burgers with a variety of fillings.",
+    },
+    {
+      title: "Desserts",
+      description: "Indulge in our sweet and delightful desserts.",
     },
   ]);
 
@@ -93,7 +97,8 @@ const Home = () => {
         </button>
       </div>
 
-      {/* <Chat /> */}
+      {/* Chat Component */}
+      <Chat />
 
       {/* Cart Button */}
       <div className="fixed bottom-4 right-4">
