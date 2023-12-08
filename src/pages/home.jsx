@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Chats from "../components/chats";
 import BG from "../../public/wallpaper.jpg";
 
-const Card = ({ title, description, addToCart }) => {
+const Card = ({ title, description, addToCart ,price}) => {
   const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(8.99);
+  // const [price, setPrice] = useState(8.99);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
@@ -22,13 +22,14 @@ const Card = ({ title, description, addToCart }) => {
     addToCart({ title, price });
   };
 
+
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600">{description}</p>
 
       {/* Money Text */}
-      <p className="text-red-500 font-bold mt-2">${price.toFixed(2)}</p>
+      <p className="text-red-500 font-bold mt-2">${price}</p>
 
       {/* Quantity and Add Option */}
       <div className="flex items-center justify-between mt-2">
@@ -66,29 +67,25 @@ const Card = ({ title, description, addToCart }) => {
 
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cards, setCards] = useState([
-    {
-      title: "Pizza",
-      description: "Delicious pizza with various toppings.",
-    },
-    {
-      title: "Pasta",
-      description: "Classic pasta with your choice of sauce.",
-    },
-    {
-      title: "Burger",
-      description: "Juicy burgers with a variety of fillings.",
-    },
-    {
-      title: "Desserts",
-      description: "Indulge in our sweet and delightful desserts.",
-    },
-  ]);
+  const [cards, setCards] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addOns, setAddOns] = useState("");
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+  const getData = async () => {
+    await fetch("http://localhost:3000/getdata")
+      .then((res) => {
+        res.json().then((data) => {
+        setCards(data.data)
+      })
+    })
+    
+  }
+
+  useEffect(() => {
+    getData();
+  })
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -129,8 +126,9 @@ const Home = () => {
         {cards.map((card, index) => (
           <Card
             key={index}
-            title={card.title}
+            title={card.f_name}
             description={card.description}
+            price = {card.f_price}
             addToCart={addToCart}
           />
         ))}

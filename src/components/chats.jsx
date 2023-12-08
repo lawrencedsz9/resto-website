@@ -1,6 +1,7 @@
 // import Kommunicate from "@kommunicate/kommunicate-chatbot-plugin";
 import React, { useEffect } from "react";
 
+
 function Chatbot() {
   useEffect(() => {
     (function (d, m) {
@@ -17,7 +18,17 @@ function Chatbot() {
       h.appendChild(s);
       window.kommunicate = m;
       m._globals = kommunicateSettings;
+      // document.addEventListener('kmUserTyping', function(event) {
+      //   console.log('User Typing:', event.detail);
+      // });
+      // document.addEventListener('onKmMessageReceived', function(event) {
+      //   const message = event.detail.data;
+      //   if (message.type === 'bot' || message.type === 'agent') {
+      //     console.log('Bot Response:', message.message);
+      //   }
+      // });
     })(document, window.kommunicate || {});
+   
   }, []);
   return <div></div>;
 }

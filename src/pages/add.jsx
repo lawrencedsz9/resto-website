@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const AddItem = () => {
   const [item, setItem] = useState("");
   const [price, setPrice] = useState("");
+  const [desc, setDesc] = useState("");
   const [best, setBest] = useState(false);
   const [nonveg, setNonveg] = useState(false);
 
@@ -28,6 +29,7 @@ const AddItem = () => {
         price: price,
         best: best,
         nonveg: nonveg,
+        desc: desc,
       };
       console.log(data);
       fetch(`${SERVER_URL}/add`, {
@@ -69,6 +71,13 @@ const AddItem = () => {
             className="rounded p-1 m-1"
             placeholder="Item Price"
           />
+          <textarea
+            type="text"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+            className="rounded p-1 m-1"
+            placeholder="Item Description"
+          />
           <input
             type="checkbox"
             value={best}
@@ -76,6 +85,7 @@ const AddItem = () => {
             id="bestseller"
             className="p-1 m-1"
           />
+
           <label htmlFor="bestseller">Bestseller?</label>
           <input
             type="checkbox"
