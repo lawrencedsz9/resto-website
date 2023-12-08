@@ -1,20 +1,26 @@
 import { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import AdminPage from "./pages/admin";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
+      <Navbar />
+      <div className="w-full h-20 bg-slate-300">
         <Router>
           <Routes>
-            <Route path="/" element={<h1>Home Page</h1>} />
-            <Route path="/admin" element={<h1>Admin Page</h1>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </Router>
       </div>
+      <Footer />
     </>
   );
 }
