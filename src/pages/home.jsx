@@ -79,8 +79,8 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-[url('../../public/wallpaper.jpg')] w-full ">
-      <div className="bg-white p-8 rounded-lg shadow-md md:mr-4">
+    <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
+      <div className="bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
         <div className="h-20"></div>
         <h1 className="text-4xl font-bold mb-4 w-fill">
           Welcome to Our Restaurant
