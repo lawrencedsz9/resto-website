@@ -29,8 +29,8 @@ app.post("/add", async (req, res) => {
 });
 
 app.get("/getdata", async (req, res) => {
-  const data = await foodmodel.find();
-  res.send(data);
+    const data = await foodmodel.find();
+    res.json({"data":data})
 });
 
 app.listen(port, () => {
