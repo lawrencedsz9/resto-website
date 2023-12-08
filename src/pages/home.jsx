@@ -3,10 +3,52 @@ import Chats from "../components/chats";
 import BG from "../../public/wallpaper.jpg";
 
 const Card = ({ title, description }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
-    <div className="bg-white p-4 rounded-md shadow-md mb-4">
+    <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600">{description}</p>
+
+      {/* Money Text */}
+      <p className="text-red-500 font-bold mt-2">$8.99</p>
+
+      {/* Quantity and Add Option */}
+      <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center">
+          <button
+            className="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
+            onClick={decrementQuantity}
+          >
+            -
+          </button>
+          <span className="mx-2">{quantity}</span>
+          <button
+            className="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
+            onClick={incrementQuantity}
+          >
+            +
+          </button>
+        </div>
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+          onClick={() => {
+            console.log("Add clicked");
+          }}
+        >
+          Add
+        </button>
+      </div>
     </div>
   );
 };
@@ -16,7 +58,7 @@ const Home = () => {
   const [cards] = useState([
     {
       title: "Pizza",
-      description: "Delicioues pizza with various toppings.",
+      description: "Delicious pizza with various toppings.",
     },
     {
       title: "Pasta",
