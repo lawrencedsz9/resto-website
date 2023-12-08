@@ -8,13 +8,12 @@ import Footer from "./components/footer";
 import AddItem from "./pages/add";
 import Chat from "./components/chat";
 
-
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="w-full ">
         <Router>
           <Routes>
