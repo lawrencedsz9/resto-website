@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Chats from "../components/chats";
 import BG from "../../public/wallpaper.jpg";
 
-const Card = ({ title, description }) => {
+const Card = ({ title, description, addToCart }) => {
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(8.99);
 
@@ -16,6 +16,10 @@ const Card = ({ title, description }) => {
       setQuantity(quantity - 1);
       setPrice(price - 8.99);
     }
+  };
+
+  const handleAddToCart = () => {
+    addToCart({ title, price });
   };
 
   return (
@@ -45,9 +49,7 @@ const Card = ({ title, description }) => {
         </div>
         <button
           className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
-          onClick={() => {
-            console.log("Add clicked");
-          }}
+          onClick={handleAddToCart}
         >
           Add
         </button>
@@ -58,7 +60,7 @@ const Card = ({ title, description }) => {
 
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cards] = useState([
+  const [cards, setCards] = useState([
     {
       title: "Pizza",
       description: "Delicious pizza with various toppings.",
@@ -76,9 +78,14 @@ const Home = () => {
       description: "Indulge in our sweet and delightful desserts.",
     },
   ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
   };
 
   return (
@@ -89,7 +96,12 @@ const Home = () => {
           Welcome to Our Restaurant
         </h1>
         {cards.map((card, index) => (
-          <Card key={index} title={card.title} description={card.description} />
+          <Card
+            key={index}
+            title={card.title}
+            description={card.description}
+            addToCart={addToCart}
+          />
         ))}
       </div>
 
@@ -125,6 +137,12 @@ const Home = () => {
         <h2 className="text-2xl font-bold">Add to Cart</h2>
         <section className="mt-4">
           <h3 className="text-xl font-bold">List of Items</h3>
+          {cartItems.map((item, index) => (
+            <div key={index}>
+              <p>{item.title}</p>
+              <p>Price: ${item.price.toFixed(2)}</p>
+            </div>
+          ))}
         </section>
         <section className="mt-4">
           <h3 className="text-xl font-bold">Add-ons</h3>
