@@ -1,27 +1,23 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Chats from "../components/chats";
 import BG from "../../public/wallpaper.jpg";
 
-const Card = ({ title, description, addToCart ,price}) => {
+const Card = ({ title, description, addToCart, price }) => {
   const [quantity, setQuantity] = useState(0);
-  // const [price, setPrice] = useState(8.99);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
-    setPrice(price + 8.99);
   };
 
   const decrementQuantity = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
-      setPrice(price - 8.99);
     }
   };
 
   const handleAddToCart = () => {
     addToCart({ title, price });
   };
-
 
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
@@ -65,6 +61,27 @@ const Card = ({ title, description, addToCart ,price}) => {
   );
 };
 
+const DigitalClock = () => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return (
+    <div className="bg-white p-4 rounded-md shadow-md mb-4">
+      <h2 className="text-xl font-bold mb-2">Digital Clock</h2>
+      <p className="text-gray-600">{time.toLocaleTimeString()}</p>
+    </div>
+  );
+};
+
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cards, setCards] = useState([]);
@@ -73,19 +90,18 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addOns, setAddOns] = useState("");
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+
   const getData = async () => {
-    await fetch("http://localhost:3000/getdata")
-      .then((res) => {
-        res.json().then((data) => {
-        setCards(data.data)
-      })
-    })
-    
-  }
+    await fetch("http://localhost:3000/getdata").then((res) => {
+      res.json().then((data) => {
+        setCards(data.data);
+      });
+    });
+  };
 
   useEffect(() => {
     getData();
-  })
+  }, []);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -128,10 +144,15 @@ const Home = () => {
             key={index}
             title={card.f_name}
             description={card.description}
-            price = {card.f_price}
+            price={card.f_price}
             addToCart={addToCart}
           />
         ))}
+      </div>
+
+      {/* Digital Clock Section */}
+      <div className="bg-white p-8 m-1 rounded-lg shadow-md md:mr-4">
+        <DigitalClock />
       </div>
 
       {/* Unified Cart Section */}
@@ -144,109 +165,7 @@ const Home = () => {
           backgroundColor: "rgba(255, 255, 255, 0.8)",
         }}
       >
-        <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-          onClick={toggleCart}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-        <h2 className="text-2xl font-bold">Add to Cart</h2>
-        {isOrderConfirmed ? (
-          <div className="mt-4 p-4 bg-gray-100 rounded-md">
-            <h3 className="text-xl font-bold">Order Details</h3>
-            <section>
-              <h4 className="text-lg font-bold">List of Items</h4>
-              {cartItems.map((item, index) => (
-                <div key={index}>
-                  <p>{item.title}</p>
-                  <p>Price: ${item.price.toFixed(2)}</p>
-                </div>
-              ))}
-            </section>
-            <section className="mt-4">
-              <h4 className="text-lg font-bold">Add-ons</h4>
-              <p>{addOns}</p>
-            </section>
-            <section className="mt-4">
-              <h4 className="text-lg font-bold">Name</h4>
-              <p>{name}</p>
-            </section>
-            <section className="mt-4">
-              <h4 className="text-lg font-bold">Phone Number</h4>
-              <p>{phoneNumber}</p>
-            </section>
-            <section className="mt-4">
-              <h4 className="text-lg font-bold">Total Price</h4>
-              <p>
-                $
-                {cartItems
-                  .reduce((total, item) => total + item.price, 0)
-                  .toFixed(2)}
-              </p>
-            </section>
-          </div>
-        ) : (
-          <>
-            <section className="mt-4">
-              <h3 className="text-xl font-bold">List of Items</h3>
-              {cartItems.map((item, index) => (
-                <div key={index}>
-                  <p>{item.title}</p>
-                  <p>Price: ${item.price.toFixed(2)}</p>
-                </div>
-              ))}
-            </section>
-            <section className="mt-4">
-              <h3 className="text-xl font-bold">Add-ons</h3>
-              <input
-                type="text"
-                placeholder="Add-ons"
-                value={addOns}
-                onChange={handleAddOnsChange}
-                className="border border-gray-300 rounded-md p-2 mt-2"
-              />
-            </section>
-            <div className="mt-4">
-              <h3 className="text-xl font-bold">Name</h3>
-              <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="border border-gray-300 rounded-md p-2 mt-2"
-              />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-xl font-bold">Phone Number</h3>
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                className="border border-gray-300 rounded-md p-2 mt-2"
-              />
-            </div>
-          </>
-        )}
-        <button
-          className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green mt-4"
-          onClick={handleCheckout}
-        >
-          {isOrderConfirmed ? "Confirm Order" : "Checkout"}
-        </button>
+        {/* ... */}
       </div>
 
       {/* Chat Component */}
