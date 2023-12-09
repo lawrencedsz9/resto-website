@@ -119,11 +119,12 @@ const Home = () => {
   };
 
   const handleCheckout = () => {
-    // Calculate total price
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-
-    // Display confirmation message
     setIsOrderConfirmed(true);
+    if (isOrderConfirmed) {
+      // Redirect to payment page
+      window.location.href = "/payment";
+    }
     console.log("Confirm Order");
     console.log("Total Price:", totalPrice.toFixed(2));
   };
@@ -135,9 +136,8 @@ const Home = () => {
   return (
     <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
       <div className="bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <div className="h-20"></div>
-        <h1 className="text-4xl font-bold mb-4 w-fill">
-          Welcome to Our Restaurant
+        <h1 className="text-4xl font-bold mb-4 w-fill text-center uppercase">
+          <span className="text-red-500">WELCOME TO OUR RESTAURANT</span>
         </h1>
         {cards.map((card, index) => (
           <Card

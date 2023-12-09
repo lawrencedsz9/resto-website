@@ -10,6 +10,7 @@ import Chat from "./components/chat";
 import ChatBot from "./components/chats";
 import Displaycard from "./components/Displaycard";
 import Login from "./pages/login";
+import Payment from "./pages/payments";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +28,7 @@ function App() {
             <Route path="/chats" element={<ChatBot />} />
             <Route path="/add" element={<AddItem />} />
             <Route path="/display" element={<Displaycard />} />
+            <Route path="payment" element={<Payment />} />
           </Routes>
         </Router>
       </div>
