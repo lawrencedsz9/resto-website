@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chats from "../components/chats";
-import BG from "../../public/wallpaper.jpg";
+import Marquee from "react-fast-marquee";
 
 const Card = ({ title, description, addToCart, price }) => {
   const [quantity, setQuantity] = useState(0);
@@ -23,11 +23,7 @@ const Card = ({ title, description, addToCart, price }) => {
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600">{description}</p>
-
-      {/* Money Text */}
       <p className="text-red-500 font-bold mt-2">${price}</p>
-
-      {/* Quantity and Add Option */}
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center">
           <button
@@ -71,11 +67,9 @@ const Home = () => {
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
   const getData = async () => {
-    await fetch("http://localhost:3000/getdata").then((res) => {
-      res.json().then((data) => {
-        setCards(data.data);
-      });
-    });
+    const res = await fetch("http://localhost:3000/getdata");
+    const data = await res.json();
+    setCards(data.data);
   };
 
   useEffect(() => {
@@ -115,8 +109,13 @@ const Home = () => {
   return (
     <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
       <div className="bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <h1 className="text-4xl font-bold mb-4 w-fill text-center uppercase">
-          <span className="text-red-500">WELCOME TO OUR RESTAURANT</span>
+        <div className="h-20">
+        <Marquee>
+  I can be a React component, multiple React components, or just some text.
+</Marquee>
+        </div>
+        <h1 className="text-4xl font-bold mb-4 w-fill">
+          Welcome to Our Restaurant
         </h1>
         {cards.map((card, index) => (
           <Card
