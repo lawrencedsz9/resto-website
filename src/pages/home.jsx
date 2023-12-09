@@ -94,6 +94,10 @@ const Home = () => {
   const handleCheckout = () => {
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
     setIsOrderConfirmed(true);
+    if (isOrderConfirmed) {
+      // Redirect to payment page
+      window.location.href = "/payment";
+    }
     console.log("Confirm Order");
     console.log("Total Price:", totalPrice.toFixed(2));
   };
