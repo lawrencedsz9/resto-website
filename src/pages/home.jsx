@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chats from "../components/chats";
-import BG from "../../public/wallpaper.jpg";
+import Marquee from "react-fast-marquee";
 
 const Card = ({ title, description, addToCart, price }) => {
   const [quantity, setQuantity] = useState(0);
@@ -23,11 +23,7 @@ const Card = ({ title, description, addToCart, price }) => {
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600">{description}</p>
-
-      {/* Money Text */}
       <p className="text-red-500 font-bold mt-2">${price}</p>
-
-      {/* Quantity and Add Option */}
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center">
           <button
@@ -61,27 +57,6 @@ const Card = ({ title, description, addToCart, price }) => {
   );
 };
 
-const DigitalClock = () => {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  return (
-    <div className="bg-white p-4 rounded-md shadow-md mb-4">
-      <h2 className="text-xl font-bold mb-2">Digital Clock</h2>
-      <p className="text-gray-600">{time.toLocaleTimeString()}</p>
-    </div>
-  );
-};
-
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cards, setCards] = useState([]);
@@ -92,11 +67,9 @@ const Home = () => {
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
   const getData = async () => {
-    await fetch("http://localhost:3000/getdata").then((res) => {
-      res.json().then((data) => {
-        setCards(data.data);
-      });
-    });
+    const res = await fetch("http://localhost:3000/getdata");
+    const data = await res.json();
+    setCards(data.data);
   };
 
   useEffect(() => {
@@ -119,10 +92,7 @@ const Home = () => {
   };
 
   const handleCheckout = () => {
-    // Calculate total price
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-
-    // Display confirmation message
     setIsOrderConfirmed(true);
     console.log("Confirm Order");
     console.log("Total Price:", totalPrice.toFixed(2));
@@ -135,7 +105,11 @@ const Home = () => {
   return (
     <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
       <div className="bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <div className="h-20"></div>
+        <div className="h-20">
+        <Marquee>
+  I can be a React component, multiple React components, or just some text.
+</Marquee>
+        </div>
         <h1 className="text-4xl font-bold mb-4 w-fill">
           Welcome to Our Restaurant
         </h1>
@@ -150,11 +124,6 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Digital Clock Section */}
-      <div className="bg-white p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <DigitalClock />
-      </div>
-
       {/* Unified Cart Section */}
       <div
         className={`fixed top-0 right-0 h-screen bg-white p-8 rounded-lg shadow-md w-full md:w-1/3 ${
@@ -165,7 +134,109 @@ const Home = () => {
           backgroundColor: "rgba(255, 255, 255, 0.8)",
         }}
       >
-        {/* ... */}
+        <button
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          onClick={toggleCart}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+        <h2 className="text-2xl font-bold">Add to Cart</h2>
+        {isOrderConfirmed ? (
+          <div className="mt-4 p-4 bg-gray-100 rounded-md">
+            <h3 className="text-xl font-bold">Order Details</h3>
+            <section>
+              <h4 className="text-lg font-bold">List of Items</h4>
+              {cartItems.map((item, index) => (
+                <div key={index}>
+                  <p>{item.title}</p>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Add-ons</h4>
+              <p>{addOns}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Name</h4>
+              <p>{name}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Phone Number</h4>
+              <p>{phoneNumber}</p>
+            </section>
+            <section className="mt-4">
+              <h4 className="text-lg font-bold">Total Price</h4>
+              <p>
+                $
+                {cartItems
+                  .reduce((total, item) => total + item.price, 0)
+                  .toFixed(2)}
+              </p>
+            </section>
+          </div>
+        ) : (
+          <>
+            <section className="mt-4">
+              <h3 className="text-xl font-bold">List of Items</h3>
+              {cartItems.map((item, index) => (
+                <div key={index}>
+                  <p>{item.title}</p>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+                </div>
+              ))}
+            </section>
+            <section className="mt-4">
+              <h3 className="text-xl font-bold">Add-ons</h3>
+              <input
+                type="text"
+                placeholder="Add-ons"
+                value={addOns}
+                onChange={handleAddOnsChange}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
+            </section>
+            <div className="mt-4">
+              <h3 className="text-xl font-bold">Name</h3>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
+            </div>
+            <div className="mt-4">
+              <h3 className="text-xl font-bold">Phone Number</h3>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border border-gray-300 rounded-md p-2 mt-2"
+              />
+            </div>
+          </>
+        )}
+        <button
+          className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green mt-4"
+          onClick={handleCheckout}
+        >
+          {isOrderConfirmed ? "Confirm Order" : "Checkout"}
+        </button>
       </div>
 
       {/* Chat Component */}
