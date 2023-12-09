@@ -24,7 +24,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 p-8 text-center">
       <div className="max-w-2xl mx-auto">
-        <div className="card-style">
+        <div className="card-style bg-gray-300 p-4">
           <form className="flex flex-col items-center" onSubmit={handleSubmit}>
             <label
               htmlFor="name"
