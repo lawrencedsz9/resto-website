@@ -1,27 +1,23 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Chats from "../components/chats";
 import BG from "../../public/wallpaper.jpg";
 
-const Card = ({ title, description, addToCart ,price}) => {
+const Card = ({ title, description, addToCart, price }) => {
   const [quantity, setQuantity] = useState(0);
-  // const [price, setPrice] = useState(8.99);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
-    setPrice(price + 8.99);
   };
 
   const decrementQuantity = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
-      setPrice(price - 8.99);
     }
   };
 
   const handleAddToCart = () => {
     addToCart({ title, price });
   };
-
 
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
@@ -73,19 +69,18 @@ const Home = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addOns, setAddOns] = useState("");
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+
   const getData = async () => {
-    await fetch("http://localhost:3000/getdata")
-      .then((res) => {
-        res.json().then((data) => {
-        setCards(data.data)
-      })
-    })
-    
-  }
+    await fetch("http://localhost:3000/getdata").then((res) => {
+      res.json().then((data) => {
+        setCards(data.data);
+      });
+    });
+  };
 
   useEffect(() => {
     getData();
-  })
+  }, []);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -103,11 +98,12 @@ const Home = () => {
   };
 
   const handleCheckout = () => {
-    // Calculate total price
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
-
-    // Display confirmation message
     setIsOrderConfirmed(true);
+    if (isOrderConfirmed) {
+      // Redirect to payment page
+      window.location.href = "/payment";
+    }
     console.log("Confirm Order");
     console.log("Total Price:", totalPrice.toFixed(2));
   };
@@ -119,16 +115,15 @@ const Home = () => {
   return (
     <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
       <div className="bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <div className="h-20"></div>
-        <h1 className="text-4xl font-bold mb-4 w-fill">
-          Welcome to Our Restaurant
+        <h1 className="text-4xl font-bold mb-4 w-fill text-center uppercase">
+          <span className="text-red-500">WELCOME TO OUR RESTAURANT</span>
         </h1>
         {cards.map((card, index) => (
           <Card
             key={index}
             title={card.f_name}
             description={card.description}
-            price = {card.f_price}
+            price={card.f_price}
             addToCart={addToCart}
           />
         ))}
