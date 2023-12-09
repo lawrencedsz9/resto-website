@@ -108,17 +108,14 @@ const Home = () => {
 
   return (
     <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
-      <div className="flex flex-col justify-center items-center bg-white overflow-scroll p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <div className="h-20">
-          <Marquee>
-            I can be a React component, multiple React components, or just some
-            text.
-          </Marquee>
+      <div className="flex flex-col justify-center items-center w-2/3 bg-white  p-8 m-1 rounded-lg shadow-md md:mr-4">
+        <div className="h-20 w-full font-semibold font-lg">
+          <Marquee>The home of pizza and pastries</Marquee>
         </div>
         <h1 className="text-4xl font-bold mb-4 w-fill">
           Welcome to Our Restaurant
         </h1>
-        <div className="  w-1/3">
+        <div className="  w-2/3 text-center">
           {cards.map((card, index) => (
             <Card
               key={index}
