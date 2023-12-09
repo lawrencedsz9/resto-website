@@ -4,14 +4,17 @@ import Marquee from "react-fast-marquee";
 
 const Card = ({ title, description, addToCart, price }) => {
   const [quantity, setQuantity] = useState(0);
+  const [money, setMoney] = useState(0);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
+    setMoney(money + price);
   };
 
   const decrementQuantity = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
+      setMoney(money - price);
     }
   };
 
@@ -23,7 +26,7 @@ const Card = ({ title, description, addToCart, price }) => {
     <div className="bg-white p-4 rounded-md shadow-md mb-4 relative">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600">{description}</p>
-      <p className="text-red-500 font-bold mt-2">${price}</p>
+      <p className="text-red-500 font-bold mt-2">₹{price}</p>
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center">
           <button
@@ -53,6 +56,7 @@ const Card = ({ title, description, addToCart, price }) => {
           Remove
         </button>
       </div>
+      <p className="text-green-500 font-bold mt-2">Total Money: ₹{money}</p>
     </div>
   );
 };
@@ -107,12 +111,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full ">
-      <div className="flex flex-col justify-center items-center w-2/3 bg-white  p-8 m-1 rounded-lg shadow-md md:mr-4">
-        <div className="h-20 w-full font-semibold font-lg">
+    <div className="flex flex-row overflow-auto p-10 items-center justify-center h-full bg-[url('../../public/wallpaper.jpg')] w-full  ">
+      <div className="flex flex-col justify-center items-center w-2/3 bg-transparent  p-8 m-1 rounded-lg shadow-md md:mr-4">
+        <div className="h-20 w-full font-semibold font-lg text-white">
           <Marquee>The home of pizza and pastries</Marquee>
         </div>
-        <h1 className="text-4xl font-bold mb-4 w-fill">
+        <h1 className="text-4xl font-bold mb-4 w-fill text-white">
           Welcome to Our Restaurant
         </h1>
         <div className="  w-2/3 text-center">
@@ -167,7 +171,7 @@ const Home = () => {
               {cartItems.map((item, index) => (
                 <div key={index}>
                   <p>{item.title}</p>
-                  <p>Price: ${item.price.toFixed(2)}</p>
+                  <p>Price: ₹{item.price.toFixed(2)}</p>
                 </div>
               ))}
             </section>
@@ -186,7 +190,7 @@ const Home = () => {
             <section className="mt-4">
               <h4 className="text-lg font-bold">Total Price</h4>
               <p>
-                $
+                ₹
                 {cartItems
                   .reduce((total, item) => total + item.price, 0)
                   .toFixed(2)}
@@ -200,7 +204,7 @@ const Home = () => {
               {cartItems.map((item, index) => (
                 <div key={index}>
                   <p>{item.title}</p>
-                  <p>Price: ${item.price.toFixed(2)}</p>
+                  <p>Price: ₹{item.price.toFixed(2)}</p>
                 </div>
               ))}
             </section>

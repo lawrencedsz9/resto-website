@@ -44,7 +44,7 @@ const Displaycard = () => {
                   key={items.name}
                   className="text-gray-700 font-semibold text-lg mb-2"
                 >
-                  ${items.f_price}
+                  ₹{items.f_price}
                 </p>
                 <button
                   key={items.name}
